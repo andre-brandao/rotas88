@@ -6,6 +6,15 @@
 	let radius = $state(2400);
 	let numPetals = $state(6);
 	$inspect({ radius, numPetals });
+
+	let markers = [
+		[-19.96811611070914, -43.95033258481795],
+		[-19.95811611070914, -43.97033258481795],
+		[-19.97811611070914, -43.95033258681795],
+		[-19.96815611070914, -43.97033258481795],
+		[-19.96811611070914, -43.96043258481795],
+		[-19.96811611070914, -43.96033258481795]
+	];
 </script>
 
 <div class="bg-white">
@@ -18,19 +27,19 @@
 		Number of petals <input type="range" bind:value={numPetals} min="0" max="20" step="1" />
 	</div>
 </div>
+
 <Map options={{ center: [-19.96811611070914, -43.96033258481795], zoom: 13 }}>
-			<Marker latLng={[-19.96811611070914, -43.95033258481795]} />
-			<Marker latLng={[-19.95811611070914, -43.97033258481795]} />
-			<Marker latLng={[-19.97811611070914, -43.95033258681795]} />
-			<Marker latLng={[-19.96815611070914, -43.97033258481795]} />
-			{#key [radius, numPetals]}
-				<Flower
-					latLng={[-19.96811611070914, -43.96033258481795]}
-					
-					options={{
-						radius: radius,
-						numPetals: numPetals
-					}}
-				/>
-			{/key}
+	{#each markers as m}
+		<Marker latLng={m} />
+	{/each}
+
+	{#key [radius, numPetals]}
+		<Flower
+			latLng={[-19.96811611070914, -43.96033258481795]}
+			options={{
+				radius: radius,
+				numPetals: numPetals
+			}}
+		/>
+	{/key}
 </Map>
